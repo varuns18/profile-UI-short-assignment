@@ -67,9 +67,9 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     ProfileHeader()
                     Spacer(modifier = Modifier.height(16.dp))
                     CREDGarageCard()
-                    Spacer(modifier = Modifier.height(24.dp))
-                    AccountOverviewSection()
                     Spacer(modifier = Modifier.height(16.dp))
+                    AccountOverviewSection()
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
                 Spacer(modifier = Modifier.height(24.dp))
                 YourRewardsAndBenefitsSection()
@@ -351,93 +351,97 @@ fun ProfileListItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
-            .clickable(
-                onClick = onClick
-            ),
+            .padding(vertical = 8.dp) // Keep external spacing only half
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(4.dp)) // Optional: visual clipping if needed
+                .clickable(onClick = onClick)
+                .padding(vertical = 8.dp), // Internal padding inside clickable
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (icon != null) {
-                    OutlinedIconButton(
-                        modifier = Modifier.size(20.dp),
-                        enabled = false,
-                        border = BorderStroke(1.dp, colorResource(R.color.tertiary)),
-                        onClick = {},
-                        colors = IconButtonColors(
-                            containerColor = colorResource(R.color.card_background),
-                            contentColor = colorResource(R.color.tertiary),
-                            disabledContainerColor = colorResource(R.color.card_background),
-                            disabledContentColor = colorResource(R.color.tertiary)
-                        )
-                    ) {
-                        Icon(
-                            icon,
-                            contentDescription = title,
-                            modifier = Modifier.size(12.dp),
-                        )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (icon != null) {
+                        OutlinedIconButton(
+                            modifier = Modifier.size(20.dp),
+                            enabled = false,
+                            border = BorderStroke(1.dp, colorResource(R.color.tertiary)),
+                            onClick = {},
+                            colors = IconButtonColors(
+                                containerColor = colorResource(R.color.card_background),
+                                contentColor = colorResource(R.color.tertiary),
+                                disabledContainerColor = colorResource(R.color.card_background),
+                                disabledContentColor = colorResource(R.color.tertiary)
+                            )
+                        ) {
+                            Icon(
+                                icon,
+                                contentDescription = title,
+                                modifier = Modifier.size(12.dp),
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(6.dp))
                     }
-
-                    Spacer(modifier = Modifier.width(6.dp))
-                }
-                Text(
-                    title,
-                    fontFamily = myFont,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 14.sp,
-                    color = colorResource(R.color.secondary),
-                )
-                if (!(suggestion.isNullOrBlank())){
-                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        suggestion,
+                        title,
                         fontFamily = myFont,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 12.sp,
-                        color = colorResource(R.color.primary),
-                    )
-                }
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (value != null) {
-                    Text(
-                        value,
-                        fontFamily = myFont,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Thin,
                         fontSize = 14.sp,
                         color = colorResource(R.color.secondary),
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Icon(
-                        painter = painterResource(R.drawable.ic_arror_forward),
-                        contentDescription = null,
-                        tint = colorResource(R.color.secondary)
-                    )
-                } else {
-                    Icon(
-                        imageVector = Icons.Rounded.KeyboardArrowRight,
-                        contentDescription = null,
-                        tint = colorResource(R.color.secondary)
-                    )
+                    if (!suggestion.isNullOrBlank()) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            suggestion,
+                            fontFamily = myFont,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp,
+                            color = colorResource(R.color.primary),
+                        )
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (value != null) {
+                        Text(
+                            value,
+                            fontFamily = myFont,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                            color = colorResource(R.color.secondary),
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Icon(
+                            painter = painterResource(R.drawable.ic_arror_forward),
+                            contentDescription = null,
+                            tint = colorResource(R.color.secondary)
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Rounded.KeyboardArrowRight,
+                            contentDescription = null,
+                            tint = colorResource(R.color.secondary)
+                        )
+                    }
                 }
             }
-        }
-        if (!bottomValue.isNullOrBlank()){
-            Text(
-                text = bottomValue,
-                fontFamily = myFont,
-                fontWeight = FontWeight.Medium,
-                fontSize = 14.sp,
-                color = colorResource(R.color.tertiary)
-            )
+            if (!bottomValue.isNullOrBlank()) {
+                Text(
+                    text = bottomValue,
+                    fontFamily = myFont,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 14.sp,
+                    color = colorResource(R.color.tertiary)
+                )
+            }
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
