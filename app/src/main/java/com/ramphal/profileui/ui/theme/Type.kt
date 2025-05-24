@@ -2,9 +2,12 @@ package com.ramphal.profileui.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.ramphal.profileui.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -31,4 +34,12 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+)
+
+val myFont = FontFamily(
+    Font(R.font.gilroy_black, FontWeight.Black),
+    Font(R.font.gilroy_bold, FontWeight.Bold),
+    Font(R.font.gilroy_light, FontWeight.Light),
+    Font(R.font.gilroy_medium, FontWeight.Medium),
+    Font(R.font.gilroy_black_italic, FontWeight.Normal, style = FontStyle.Italic),
 )
